@@ -50,8 +50,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-
       - name: Create release Notes
         uses: ncipollo/release-action@v1
         with:
@@ -60,7 +58,7 @@ jobs:
           body: |
             This release includes the following container image:
             http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}
-          
+
       - name: Deliver Docker Compose file to staging
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -80,4 +78,8 @@ jobs:
             cd dowa
             docker compose pull
             docker compose up -d
-            
+
+      - name: Cleanup orphan processes
+        run: |
+          pkill -f process_name || true # Replace process_name with the actual process name
+          docker system prune -f

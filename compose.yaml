@@ -1,5 +1,6 @@
 ﻿services:
     web:
-      image: ghcr.io/jakoc/week_nine:staging
+      image: ghcr.io/jakoc/week_nine:staging #streng
       ports:
         - "8000:8080"
+        

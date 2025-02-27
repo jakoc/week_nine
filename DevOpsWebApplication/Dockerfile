@@ -1,10 +1,10 @@
 ﻿# Brug en officiel .NET runtime som baseimage
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
 # Brug en officiel .NET SDK som build image
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["DevOpsWebApplication/DevOpsWebApplication.csproj", "DevOpsWebApplication/"]
 RUN dotnet restore "DevOpsWebApplication/DevOpsWebApplication.csproj"

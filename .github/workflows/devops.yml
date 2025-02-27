@@ -41,13 +41,22 @@ jobs:
             .
           docker push ghcr.io/${{ github.repository }} --all-tags
 
+      - name: Delete existing tag and release if exists
+        continue-on-error: true
+        run: |
+          git tag -d ${{ steps.semver-app.outputs.version }} || true
+          git push origin :refs/tags/${{ steps.semver-app.outputs.version }} || true
+          gh release delete ${{ steps.semver-app.outputs.version }} --yes || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+
       - name: Create release Notes
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.semver-app.outputs.version }}
           generateReleaseNotes: true
-          replacesArtifacts: true
-          skipIfReleaseExists: false
           body: |
             This release includes the following container image:
             http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}

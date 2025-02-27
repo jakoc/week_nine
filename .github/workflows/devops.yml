@@ -1,5 +1,10 @@
 name: DevOps Pipeline
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 on:
   push:
     branches:
@@ -25,7 +30,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
-          
+
       - name: Build and Push Docker Image
         run: |
           docker build \
@@ -35,7 +40,6 @@ jobs:
             .
           docker push ghcr.io/${{ github.repository }} --all-tags
 
-
       - name: Create release Notes
         uses: ncipollo/release-action@v1
         with:
@@ -44,4 +48,3 @@ jobs:
           body: |
             This release includes the following container image:
             http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}
-          

@@ -1,7 +1,7 @@
 name: DevOps Pipeline
 
 permissions:
-  contents: read
+  contents: write
   packages: write
   id-token: write
   actions: write
@@ -49,3 +49,4 @@ jobs:
           body: |
             This release includes the following container image:
             http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}
+          token: ${{ secrets.GH_PAT }}

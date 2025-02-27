@@ -25,7 +25,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
+          
       - name: Build and Push Docker Image
         run: |
           docker build \
@@ -43,4 +43,5 @@ jobs:
           generateReleaseNotes: true
           body: |
             This release includes the following container image:
-            http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}
+            http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version 
+            

@@ -46,6 +46,8 @@ jobs:
         with:
           tag: ${{ steps.semver-app.outputs.version }}
           generateReleaseNotes: true
+          replacesArtifacts: true
+          skipIfReleaseExists: false
           body: |
             This release includes the following container image:
             http://ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}

@@ -1,18 +1,11 @@
-﻿# Use an official Node.js runtime as a parent image
-FROM node:18
+﻿# Brug en base image (Ubuntu i dette eksempel)
+FROM ubuntu:latest
 
-# Set the working directory
+# Indstil arbejdsdirectory
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install --production
-
-# Copy the rest of the application
+# Kopiér filer fra din applikation ind i containeren
 COPY . .
 
-# Expose the port
-EXPOSE 3000
-
-# Start the application
-CMD ["node", "server.js"]
+# Standard kommando (udskift med din applikations startkommando)
+CMD ["echo", "Hello, DevOps!"]

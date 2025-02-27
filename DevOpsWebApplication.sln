@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevOpsWebApplication", "DevOpsWebApplication\DevOpsWebApplication.csproj", "{C10FD267-7759-4AD5-8F83-18D5FF40A9EF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D816DB4-57D2-423F-BE88-D90EBC12E862}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{14435B16-7F02-4D79-95A6-566BD17590FE}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
 	EndProjectSection

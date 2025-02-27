@@ -1,0 +1,5 @@
+﻿services:
+    web:
+      image: ghcr.io/jakoc/week_nine:staging
+      ports:
+        - "8000:8080"

@@ -74,6 +74,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
+      # Du kan ikke benytte semver-app, da det step ligger i et andet job. Derfor bliver version-nummeret tomt, og tagget ugyldigt.
+      # Derfor bør du indsætte versions-steppet en gang til :)
+      # Det er heller ikke nødvendigt at builde docker en gang til - det har du allerede gjort, og der ligger en version vi ved fungerer.
+      # Den version kan vi "forfremme" til produktion med følgende kode:
+      #
+      #  - name: Promote Docker Image
+      #  run: |
+      #    docker pull ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }}
+      #    docker tag ghcr.io/${{ github.repository }}:${{ steps.semver-app.outputs.version }} ghcr.io/${{ github.repository }}:production
+      #    docker push ghcr.io/${{ github.repository }} --all-tags
+
       - name: Build and Push Docker Image for Production
         run: |
           docker build \
@@ -83,6 +94,8 @@ jobs:
             .
           docker push ghcr.io/${{ github.repository }} --all-tags
 
+      # Herefter skal der laves en ekstra docker-compose-fil, der peget på "production"-tagget i stedet for staging.
+      # Det er så den nye compose-fil der skal kopieres til produktions-serveren, og køres derude.
       - name: Deliver Docker Compose file to production
         uses: appleboy/scp-action@v0.1.7
         with:
